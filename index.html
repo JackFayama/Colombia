@@ -53,7 +53,31 @@ Login
 </button>
 </form>
 <div class="mt-6 text-center">
-<p class="text-sm text-gray-600">Forgot your student ID? <a href="#" class="font-medium text-primary hover:text-primary/80">Contact support</a></p>
+<p class="text-sm text-gray-600">Forgot your student ID? <a href="#" class="font-medium text-primary hover:text-primary/80" id="contact-support">Contact support</a>
+<div id="contact-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+<div class="bg-white rounded-lg p-8 max-w-md w-full mx-4 relative">
+<button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-close-line"></i>
+</div>
+</button>
+<div class="text-center">
+<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+<div class="w-8 h-8 flex items-center justify-center text-primary">
+<i class="ri-customer-service-2-line"></i>
+</div>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Contact Support</h3>
+<p class="text-gray-600 mb-6">Our support team is here to help you with any questions or concerns.</p>
+<div class="bg-gray-50 rounded-lg p-4 flex items-center justify-center gap-2">
+<div class="w-5 h-5 flex items-center justify-center text-primary">
+<i class="ri-mail-line"></i>
+</div>
+<a href="mailto:support@columbia.edu" class="text-primary hover:underline">support@columbia.edu</a>
+</div>
+</div>
+</div>
+</div></p>
 </div>
 </div>
 <div class="mt-8 text-center text-xs text-gray-500">
@@ -147,7 +171,7 @@ Paid in Full
 </div>
 <div class="bg-gray-50 rounded-lg p-4">
 <h4 class="text-sm font-medium text-gray-500 mb-2">Current Balance</h4>
-<p class="text-2xl font-bold text-green-600">$0.00</p>
+<p class="text-2xl font-bold text-green-600" id="balance-amount">$0.00</p>
 </div>
 <div class="bg-gray-50 rounded-lg p-4">
 <h4 class="text-sm font-medium text-gray-500 mb-2">Next Payment Due</h4>
@@ -508,28 +532,28 @@ Paid in Full
 <a href="#" class="text-sm text-gray-500 hover:text-primary">Terms of Service</a>
 <a href="#" class="text-sm text-gray-500 hover:text-primary" id="contact-support">Contact Support</a>
 <div id="contact-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-  <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4 relative">
-    <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-      <div class="w-6 h-6 flex items-center justify-center">
-        <i class="ri-close-line"></i>
-      </div>
-    </button>
-    <div class="text-center">
-      <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-        <div class="w-8 h-8 flex items-center justify-center text-primary">
-          <i class="ri-customer-service-2-line"></i>
-        </div>
-      </div>
-      <h3 class="text-xl font-semibold text-gray-900 mb-2">Contact Support</h3>
-      <p class="text-gray-600 mb-6">Our support team is here to help you with any questions or concerns.</p>
-      <div class="bg-gray-50 rounded-lg p-4 flex items-center justify-center gap-2">
-        <div class="w-5 h-5 flex items-center justify-center text-primary">
-          <i class="ri-mail-line"></i>
-        </div>
-        <a href="mailto:support@columbia.edu" class="text-primary hover:underline">support@columbia.edu</a>
-      </div>
-    </div>
-  </div>
+<div class="bg-white rounded-lg p-8 max-w-md w-full mx-4 relative">
+<button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-close-line"></i>
+</div>
+</button>
+<div class="text-center">
+<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+<div class="w-8 h-8 flex items-center justify-center text-primary">
+<i class="ri-customer-service-2-line"></i>
+</div>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Contact Support</h3>
+<p class="text-gray-600 mb-6">Our support team is here to help you with any questions or concerns.</p>
+<div class="bg-gray-50 rounded-lg p-4 flex items-center justify-center gap-2">
+<div class="w-5 h-5 flex items-center justify-center text-primary">
+<i class="ri-mail-line"></i>
+</div>
+<a href="mailto:support@columbia.edu" class="text-primary hover:underline">support@columbia.edu</a>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -538,24 +562,46 @@ Paid in Full
 </div>
 <script id="modal-script">
 document.addEventListener('DOMContentLoaded', function() {
-  const contactSupport = document.getElementById('contact-support');
-  const contactModal = document.getElementById('contact-modal');
-  const closeModal = document.getElementById('close-modal');
-  contactSupport.addEventListener('click', function(e) {
-    e.preventDefault();
-    contactModal.classList.remove('hidden');
-    contactModal.classList.add('flex');
-  });
-  closeModal.addEventListener('click', function() {
-    contactModal.classList.add('hidden');
-    contactModal.classList.remove('flex');
-  });
-  contactModal.addEventListener('click', function(e) {
-    if (e.target === contactModal) {
-      contactModal.classList.add('hidden');
-      contactModal.classList.remove('flex');
-    }
-  });
+const contactSupport = document.getElementById('contact-support');
+const contactModal = document.getElementById('contact-modal');
+const closeModal = document.getElementById('close-modal');
+contactSupport.addEventListener('click', function(e) {
+e.preventDefault();
+contactModal.classList.remove('hidden');
+contactModal.classList.add('flex');
+});
+closeModal.addEventListener('click', function() {
+contactModal.classList.add('hidden');
+contactModal.classList.remove('flex');
+});
+contactModal.addEventListener('click', function(e) {
+if (e.target === contactModal) {
+contactModal.classList.add('hidden');
+contactModal.classList.remove('flex');
+}
+});
+});
+</script>
+<script id="modal-script">
+document.addEventListener('DOMContentLoaded', function() {
+const contactSupport = document.getElementById('contact-support');
+const contactModal = document.getElementById('contact-modal');
+const closeModal = document.getElementById('close-modal');
+contactSupport.addEventListener('click', function(e) {
+e.preventDefault();
+contactModal.classList.remove('hidden');
+contactModal.classList.add('flex');
+});
+closeModal.addEventListener('click', function() {
+contactModal.classList.add('hidden');
+contactModal.classList.remove('flex');
+});
+contactModal.addEventListener('click', function(e) {
+if (e.target === contactModal) {
+contactModal.classList.add('hidden');
+contactModal.classList.remove('flex');
+}
+});
 });
 </script>
 <script id="auth-script">
@@ -566,16 +612,92 @@ const errorMessage = document.getElementById('error-message');
 const loginScreen = document.getElementById('login-screen');
 const dashboard = document.getElementById('dashboard');
 // Valid student ID
-const validStudentId = 'CU2025LAW0931';
+const validStudentIds = {
+'CU2025LAW0931': {
+name: 'Jacob Amaitsa',
+gpa: '3.78',
+balance: '0.00',
+status: 'Paid in Full',
+nationality: 'International'
+},
+'CU2025LAW0941': {
+name: 'Emily Chen',
+gpa: '3.45',
+balance: '0.00',
+status: 'Paid in Full',
+nationality: 'Asian American'
+},
+'CU2025LAW0942': {
+name: 'Sofia Rodriguez',
+gpa: '3.52',
+balance: '4,500.00',
+status: 'Outstanding Balance',
+nationality: 'American'
+},
+'CU2025LAW0943': {
+name: 'Liu Wei',
+gpa: '3.61',
+balance: '2,750.00',
+status: 'Outstanding Balance',
+nationality: 'Chinese'
+},
+'CU2025LAW0944': {
+name: 'Sarah Johnson',
+gpa: '3.33',
+balance: '3,200.00',
+status: 'Outstanding Balance',
+nationality: 'American'
+},
+'CU2025LAW0945': {
+name: 'Zhang Min',
+gpa: '3.42',
+balance: '1,800.00',
+status: 'Outstanding Balance',
+nationality: 'Chinese'
+},
+'CU2025LAW0946': {
+name: 'Jessica Park',
+gpa: '3.67',
+balance: '0.00',
+status: 'Paid in Full',
+nationality: 'Asian American'
+}
+};
 loginForm.addEventListener('submit', function(e) {
 e.preventDefault();
 const studentId = studentIdInput.value.trim();
-if (studentId === validStudentId) {
-// Hide error message if it was shown
+if (validStudentIds.hasOwnProperty(studentId)) {
 errorMessage.classList.add('hidden');
-// Hide login screen and show dashboard
 loginScreen.classList.add('hidden');
 dashboard.classList.remove('hidden');
+const studentData = validStudentIds[studentId];
+// Update student name
+document.querySelector('#dashboard h2').textContent = studentData.name;
+// Update GPA
+document.querySelectorAll('#dashboard .text-gray-600 span').forEach(span => {
+if (span.textContent.includes('GPA:')) {
+span.textContent = `GPA: ${studentData.gpa}`;
+}
+});
+// Update balance and status
+const currentBalance = document.querySelector('.text-2xl.font-bold.text-green-600');
+if (currentBalance) {
+currentBalance.textContent = `$${studentData.balance}`;
+currentBalance.className = studentData.balance === '0.00' ?
+'text-2xl font-bold text-green-600' :
+'text-2xl font-bold text-orange-600';
+}
+// Update payment status badge
+const statusBadge = document.querySelector('.bg-green-50.text-green-700');
+if (statusBadge) {
+if (studentData.status === 'Paid in Full') {
+statusBadge.className = 'flex items-center bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm';
+statusBadge.innerHTML = '<div class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-checkbox-circle-fill"></i></div>Paid in Full';
+} else {
+statusBadge.className = 'flex items-center bg-orange-50 text-orange-700 px-3 py-1 rounded-full text-sm';
+statusBadge.innerHTML = '<div class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-error-warning-fill"></i></div>Outstanding Balance';
+}
+}
 } else {
 // Show error message
 errorMessage.classList.remove('hidden');
