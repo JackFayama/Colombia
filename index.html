@@ -506,12 +506,58 @@ Paid in Full
 <div class="flex space-x-6">
 <a href="#" class="text-sm text-gray-500 hover:text-primary">Privacy Policy</a>
 <a href="#" class="text-sm text-gray-500 hover:text-primary">Terms of Service</a>
-<a href="#" class="text-sm text-gray-500 hover:text-primary">Contact Support</a>
+<a href="#" class="text-sm text-gray-500 hover:text-primary" id="contact-support">Contact Support</a>
+<div id="contact-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+  <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4 relative">
+    <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+      <div class="w-6 h-6 flex items-center justify-center">
+        <i class="ri-close-line"></i>
+      </div>
+    </button>
+    <div class="text-center">
+      <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div class="w-8 h-8 flex items-center justify-center text-primary">
+          <i class="ri-customer-service-2-line"></i>
+        </div>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-900 mb-2">Contact Support</h3>
+      <p class="text-gray-600 mb-6">Our support team is here to help you with any questions or concerns.</p>
+      <div class="bg-gray-50 rounded-lg p-4 flex items-center justify-center gap-2">
+        <div class="w-5 h-5 flex items-center justify-center text-primary">
+          <i class="ri-mail-line"></i>
+        </div>
+        <a href="mailto:support@columbia.edu" class="text-primary hover:underline">support@columbia.edu</a>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 </div>
 </div>
 </footer>
 </div>
+<script id="modal-script">
+document.addEventListener('DOMContentLoaded', function() {
+  const contactSupport = document.getElementById('contact-support');
+  const contactModal = document.getElementById('contact-modal');
+  const closeModal = document.getElementById('close-modal');
+  contactSupport.addEventListener('click', function(e) {
+    e.preventDefault();
+    contactModal.classList.remove('hidden');
+    contactModal.classList.add('flex');
+  });
+  closeModal.addEventListener('click', function() {
+    contactModal.classList.add('hidden');
+    contactModal.classList.remove('flex');
+  });
+  contactModal.addEventListener('click', function(e) {
+    if (e.target === contactModal) {
+      contactModal.classList.add('hidden');
+      contactModal.classList.remove('flex');
+    }
+  });
+});
+</script>
 <script id="auth-script">
 document.addEventListener('DOMContentLoaded', function() {
 const loginForm = document.getElementById('login-form');
